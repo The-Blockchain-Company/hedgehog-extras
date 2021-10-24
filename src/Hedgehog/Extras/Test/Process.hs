@@ -304,14 +304,14 @@ procFlex' execConfig pkg binaryEnv arguments = GHC.withFrozenCallStack . H.evalM
     , IO.cwd = getLast $ execConfigCwd execConfig
     }
 
--- | Compute the project base.  This will be based on either the "GODX_NODE_SRC"
+-- | Compute the project base.  This will be based on either the "BCC_NODE_SRC"
 -- environment variable or the parent directory.  Both should point to the
 -- root directory of the Github project checkout.
 getProjectBase
   :: (MonadTest m, MonadIO m)
   => m String
 getProjectBase = do
-  maybeNodeSrc <- liftIO $ IO.lookupEnv "GODX_NODE_SRC"
+  maybeNodeSrc <- liftIO $ IO.lookupEnv "BCC_NODE_SRC"
   case maybeNodeSrc of
     Just path -> return path
     Nothing -> do
